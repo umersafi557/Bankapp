@@ -90,3 +90,15 @@ This repository is a learning project and should not be treated as production-re
 ## Repository hygiene
 
 Do not commit real customer information, credentials, API keys, or live database files. If a database file contains personal or sensitive information, remove it from version control and rotate any exposed secrets as appropriate.
+
+
+## Security and correctness status
+
+**Learning project only — not production-ready and not suitable for real funds or customer data.** Before any real-world use:
+
+- Review and test idempotency handling, especially retries and concurrent requests. An idempotency key should be uniquely constrained and scoped appropriately.
+- Add database transaction/concurrency tests to prove balances cannot become negative and transfers remain atomic.
+- Add authentication and per-user authorization before exposing wallet endpoints.
+- Configure database URLs and secrets through environment variables; never commit credentials or real customer records.
+- The repository currently contains a tracked `bankapp.db` file. Review it locally for sensitive or real customer data. The new `.gitignore` prevents newly untracked database files from being added, but it does not remove an already tracked database. If it contains sensitive data, remove it from version control and rotate any exposed credentials as appropriate.
+- Add database migrations and production-grade backups before relying on persistent data.
